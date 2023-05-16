@@ -1,16 +1,16 @@
 from http import HTTPStatus
+from urllib.parse import urlparse
 
-from fastapi import Request, Query
+from fastapi import Query, Request
 from lnurl import LnurlErrorResponse, LnurlPayActionResponse, LnurlPayResponse
+from loguru import logger
 from starlette.exceptions import HTTPException
 
 from lnbits.core.services import create_invoice
 from lnbits.utils.exchange_rates import get_fiat_rate_satoshis
 
 from . import lnurlp_ext
-from .crud import increment_pay_link, get_pay_link, get_address_data
-from loguru import logger
-from urllib.parse import urlparse
+from .crud import get_address_data, get_pay_link, increment_pay_link
 
 
 @lnurlp_ext.get(
