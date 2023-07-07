@@ -78,6 +78,7 @@ async def api_lnurl_callback(
 
     if comment:
         extra["comment"] = (comment,)
+        #extra["comment"] = comment
 
     # nip 57
     nostr = request.query_params.get("nostr")
@@ -104,6 +105,8 @@ async def api_lnurl_callback(
         )
     else:
         resp = LnurlPayActionResponse(pr=payment_request, routes=[])  # type: ignore
+
+    logger.info(f"api_lnurl_callback: resp({resp.dict()})")
 
     return resp.dict()
 
